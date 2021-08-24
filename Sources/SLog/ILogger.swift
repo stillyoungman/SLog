@@ -24,4 +24,15 @@ public extension ILogger {
                         file: String = #file, function: String = #function, line: UInt = #line) {
         log(level: .error, message: message, file: file, function: function, line: line)
     }
+
+    @inlinable func error(_ error: Error,
+                        file: String = #file, function: String = #function, line: UInt = #line) {
+        log(level: .error, message: .regular(error.localizedDescription),
+            file: file, function: function, line: line)
+    }
+
+    @inlinable func critical(_ message: Message,
+                             file: String = #file, function: String = #function, line: UInt = #line) {
+        log(level: .critical, message: message, file: file, function: function, line: line)
+    }
 }
