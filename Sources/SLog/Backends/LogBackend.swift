@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol LogOutput {
+public protocol LogBackend {
     func log(level: Level,
              message: Message,
              source: String?,
@@ -10,7 +10,7 @@ public protocol LogOutput {
     var preferredMessageType: Message.Kind { get }
 }
 
-extension LogOutput {
+extension LogBackend {
     public var logLevel: Level { .trace  }
     public var preferredMessageType: Message.Kind { .regular }
 }

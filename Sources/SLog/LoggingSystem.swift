@@ -1,10 +1,10 @@
 import Foundation
 
 public class LoggingSystem {
-    internal static var factory: () -> LogOutput = { NoOpLogOutput() }
+    internal static var factory: () -> LogBackend = { NoOpLogBackend() }
     fileprivate static var initialized = false
 
-    public static func bootstrap(_ factory: @escaping () -> LogOutput) {
+    public static func bootstrap(_ factory: @escaping () -> LogBackend) {
         precondition(!self.initialized, "Logging system can only be initialized once per process.")
         self.factory = factory
         self.initialized = true

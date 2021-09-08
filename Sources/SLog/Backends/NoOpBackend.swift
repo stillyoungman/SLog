@@ -1,6 +1,6 @@
 import Foundation
 
-class NoOpLogOutput: LogOutput {
+class NoOpLogBackend: LogBackend {
     func log(level: Level, message: Message, source: String?,
              file: String, function: String, line: UInt) { }
 
