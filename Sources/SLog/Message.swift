@@ -1,5 +1,6 @@
 import Foundation
 
+/// Unit to log.
 public enum Message {
     case regular(String)
     case templated(String, [TypeWrapper])

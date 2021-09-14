@@ -1,5 +1,6 @@
 import Foundation
 
+/// Default implementation of logger.
 public class Logger: ILogger {
     public let backend: LogBackend
     public let source: String?

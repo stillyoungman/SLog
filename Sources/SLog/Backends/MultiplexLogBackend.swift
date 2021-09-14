@@ -1,5 +1,6 @@
 import Foundation
 
+/// The backend gives ability to compose multiple LogBackends into one.
 public class MultiplexLogBackend: LogBackend {
     public let backends: [LogBackend]
     public let logLevel: Level

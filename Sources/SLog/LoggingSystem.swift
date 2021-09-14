@@ -1,5 +1,6 @@
 import Foundation
 
+/// Class to configure application wide logging.
 public class LoggingSystem {
     internal static var factory: () -> LogBackend = { NoOpLogBackend() }
     fileprivate static var initialized = false

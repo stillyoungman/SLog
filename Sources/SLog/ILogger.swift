@@ -1,4 +1,6 @@
+/// Protocol that describes shape of logger.
 public protocol ILogger {
+    /// Log a message passing the log level as a parameter. 
     func log(level: Level,
              message: Message,
              file: String, function: String, line: UInt)

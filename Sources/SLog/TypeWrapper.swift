@@ -1,5 +1,6 @@
 import Foundation
 
+/// Makes possible to add type metadata to value.
 public enum TypeWrapper {
     case null
     case int(Int)

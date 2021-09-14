@@ -1,5 +1,6 @@
 import Foundation
 
+/// Output of the Logger. The purpose of the protocol to abstract way of handling the log event (write to file, write to output stream, send via http, etc)
 public protocol LogBackend {
     func log(level: Level,
              message: Message,
