@@ -14,6 +14,10 @@ public extension Message {
     static func templated(_ string: String, _ arguments: TypeWrapper...) -> Message {
         .templated(string, arguments)
     }
+
+    static func templated(_ string: String, arguments: [TypeWrapper]) -> Message {
+        .templated(string, arguments)
+    }
 }
 
 extension Message: ExpressibleByStringLiteral {

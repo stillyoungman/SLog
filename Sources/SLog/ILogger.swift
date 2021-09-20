@@ -6,6 +6,10 @@ public protocol ILogger {
              file: String, function: String, line: UInt)
 }
 
+@inlinable func createMessage(of string: String, with args: [TypeWrapper]) -> Message {
+    args.count != 0 ? Message.templated(string, arguments: args) : .regular(string)
+}
+
 public extension ILogger {
     @inlinable func debug(_ message: Message,
                         file: String = #file, function: String = #function, line: UInt = #line) {
@@ -36,5 +40,40 @@ public extension ILogger {
     @inlinable func critical(_ message: Message,
                              file: String = #file, function: String = #function, line: UInt = #line) {
         log(level: .critical, message: message, file: file, function: function, line: line)
+    }
+
+    @inlinable func debug(_ message: String,
+                        file: String = #file, function: String = #function, line: UInt = #line,
+                        args: TypeWrapper...) {
+        self.debug(createMessage(of: message, with: args),
+                   file: file, function: function, line: line)
+    }
+
+    @inlinable func info(_ message: String,
+                        file: String = #file, function: String = #function, line: UInt = #line,
+                        args: TypeWrapper...) {
+        self.info(createMessage(of: message, with: args),
+                   file: file, function: function, line: line)
+    }
+
+    @inlinable func warning(_ message: String,
+                        file: String = #file, function: String = #function, line: UInt = #line,
+                        args: TypeWrapper...) {
+        self.warning(createMessage(of: message, with: args),
+                   file: file, function: function, line: line)
+    }
+
+    @inlinable func error(_ message: String,
+                        file: String = #file, function: String = #function, line: UInt = #line,
+                        args: TypeWrapper...) {
+        self.error(createMessage(of: message, with: args),
+                   file: file, function: function, line: line)
+    }
+
+    @inlinable func critical(_ message: String,
+                        file: String = #file, function: String = #function, line: UInt = #line,
+                        args: TypeWrapper...) {
+        self.critical(createMessage(of: message, with: args),
+                   file: file, function: function, line: line)
     }
 }
