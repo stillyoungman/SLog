@@ -11,12 +11,12 @@ public enum Message {
 }
 
 public extension Message {
-    static func templated(_ string: String, _ arguments: TypeWrapper...) -> Message {
-        .templated(string, arguments)
+    static func templated(_ string: String, arguments: TypeWrapperRepresentable...) -> Message {
+        .templated(string, arguments.map { $0.typeWrappedValue })
     }
 
-    static func templated(_ string: String, arguments: [TypeWrapper]) -> Message {
-        .templated(string, arguments)
+    static func templated(_ string: String, _ arguments: [TypeWrapperRepresentable]) -> Message {
+        .templated(string, arguments.map { $0.typeWrappedValue })
     }
 }
 

@@ -12,50 +12,6 @@ public enum TypeWrapper {
     case dictionary([String: TypeWrapper])
 }
 
-public extension TypeWrapper {
-    /// Stands for `Integer`
-    static func i(_ value: Int?) -> TypeWrapper {
-        guard let value = value else { return .null }
-        return .int(value)
-    }
-
-    /// Stands for `Unsigned Long`
-    static func ul(_ value: UInt64?) -> TypeWrapper {
-        guard let value = value else { return .null }
-        return .unsignedLong(value)
-    }
-
-    /// Stands for `Boolean`
-    static func b(_ value: Bool?) -> TypeWrapper {
-        guard let value = value else { return .null }
-        return .bool(value)
-    }
-
-    /// Stands for `Double`
-    static func d(_ value: Double?) -> TypeWrapper {
-        guard let value = value else { return .null }
-        return .double(value)
-    }
-
-    /// Stands for `String`
-    static func s(_ value: String?) -> TypeWrapper {
-        guard let value = value else { return .null }
-        return .string(value)
-    }
-
-    /// Stands for `Array`
-    static func a(_ value: [TypeWrapper]?) -> TypeWrapper {
-        guard let value = value else { return .null }
-        return .array(value)
-    }
-
-    /// Stands for `Dictionary`
-    static func d(_ value: [String: TypeWrapper]?) -> TypeWrapper {
-        guard let value = value else { return .null }
-        return .dictionary(value)
-    }
-}
-
 /// A simple generic `CodingKey`. Used mostly by unkeyed containers to keep
 /// track of indexes in a coding path. A shame none of the several copies of
 /// exactly this in the standard library are public.
@@ -116,54 +72,7 @@ extension TypeWrapper: Codable {
         case .string(let string): try container.encode(string)
         case .array(let items): try container.encode(items)
         case .dictionary(let dict): try container.encode(dict)
-        }
-    }
-}
-
-extension TypeWrapper: ExpressibleByNilLiteral {
-    public init(nilLiteral _: ()) {
-        self = .null
-    }
-}
-
-extension TypeWrapper: ExpressibleByIntegerLiteral {
-    public init(integerLiteral value: Int) {
-        self = .int(value)
-    }
-}
-
-extension TypeWrapper: ExpressibleByBooleanLiteral {
-    public init(booleanLiteral value: Bool) {
-        self = .bool(value)
-    }
-}
-
-extension TypeWrapper: ExpressibleByFloatLiteral {
-    public init(floatLiteral value: Double) {
-        self = .double(value)
-    }
-}
-
-extension TypeWrapper: ExpressibleByStringLiteral {
-    public init(extendedGraphemeClusterLiteral value: String) {
-        self = .string(value)
-    }
-
-    public init(stringLiteral value: String) {
-        self = .string(value)
-    }
-}
-
-extension TypeWrapper: ExpressibleByArrayLiteral {
-    public init(arrayLiteral elements: TypeWrapper...) {
-        self = .array(elements)
-    }
-}
-
-extension TypeWrapper: ExpressibleByDictionaryLiteral {
-    public init(dictionaryLiteral elements: (String, TypeWrapper)...) {
-        let dict = [String: TypeWrapper](elements, uniquingKeysWith: { first, _ in first })
-        self = .dictionary(dict)
+         }
     }
 }
 
@@ -173,11 +82,5 @@ extension TypeWrapper: CustomStringConvertible {
               let result = String(data: data, encoding: .utf8) else { return "" }
 
         return result
-    }
-}
-
-extension TypeWrapper {
-    public init(_ value: UInt64) {
-        self = .unsignedLong(value)
     }
 }
